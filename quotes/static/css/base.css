@@ -1,0 +1,68 @@
+body { 
+    font-family: 'Merriweather', serif;    
+
+}
+
+#nav {
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0.33, #000000),
+        color-stop(0.93, #474547)
+    );
+    background-image: -o-linear-gradient(bottom, #000000 33%, #474547 93%);
+    background-image: -moz-linear-gradient(bottom, #000000 33%, #474547 93%);
+    background-image: -webkit-linear-gradient(bottom, #000000 33%, #474547 93%);
+    background-image: -ms-linear-gradient(bottom, #000000 33%, #474547 93%);
+    background-image: linear-gradient(to bottom, #000000 33%, #474547 93%);
+    padding: 5px;
+}
+
+h1 { color: #FFF; }
+
+.top-link {
+    font-size: 16px;
+    padding-left: 20px;
+    color: #CCCCD5;
+}
+    a.top-link:link { text-decoration: none; }
+    a.top-link:active {color: #CCCCD5;}
+    a.top-link:hover {color: #FFF;}
+    a.top-link:visited {color: #CCCCD5;}
+
+.blue-white-text {
+    color: #CCCCD5;
+}
+
+.big-text { font-size: 20px;}
+#phone-number { font-size: 35px; padding-top: 16px;}
+#quote-button { padding-top: 35px;}
+
+#top-well {
+    overflow: hidden;
+    min-height: 150px;
+    -webkit-box-shadow: 0px 3px 22px -2px rgba(30, 32, 39, 0.74);
+    -moz-box-shadow:    0px 3px 22px -2px rgba(30, 32, 39, 0.74);
+    box-shadow:         0px 3px 22px -2px rgba(30, 32, 39, 0.74);
+}
+
+#hammer {
+    position: absolute;
+    left: -75px;
+    margin-top: -46px;
+    z-index: 1;
+}
+
+ #wrench {
+    position: absolute;
+    right: -50px;
+    margin-top: -20px;
+    z-index: 1;
+ }
+
+ .service-offering {    
+    border: 0px !important;
+    padding: 2px 4px !important;
+    border-radius: 0;
+ }

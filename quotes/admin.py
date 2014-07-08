@@ -1,5 +1,5 @@
 from django.contrib import admin
-from quote.models import Quote
+from quotes.models import Quote
 
 # Register your models here.
 class QuoteAdmin(admin.ModelAdmin):

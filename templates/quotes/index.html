@@ -1,0 +1,40 @@
+{% extends "quotes/base.html" %}
+{% load staticfiles %}
+
+
+{% block body %}
+    <div class = "container-fluid">
+        <div class="row">
+            <div class = "col-xs-12 text-center well well-lg" id="top-well">
+                <div class="container">
+                    <div class="col-xs-3">
+                        <img id="wrench" src="{% static "images/wrench-rotated.png" %}" />
+                    </div>
+                    <div class="col-xs-6">
+                        <h2>10 Years of experience making dreams come true!</h2>
+                    </div>
+
+                    <div class="col-xs-3">
+                        <img id="hammer" src="{% static "images/hammer-smaller.png" %}" />
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">Services We Offer</div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <li class="list-group-item service-offering">Plumbing</li>
+                            <li class="list-group-item service-offering">Construction</li>
+                        </ul>
+                    </div>                
+                </div>        
+            </div>
+        </div>
+    </div>
+{% endblock %}

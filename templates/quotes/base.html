@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<head>
+
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{% block meta_description %}{% endblock %}">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static "css/base.css" %}">
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:900' rel='stylesheet' type='text/css'>
+    <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> !-->
+    
+</head>
+
+<body>
+    <div id="nav" class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-8">
+                <h1> S.C.C.S <small>Southern California Construction Services</small></h1>
+            </div>
+
+            <div class="col-xs-6 col-md-2 blue-white-text text-right" id="phone-number">
+                555-555-5555
+            </div>
+
+            <div class="col-xs-6 col-md-2" id="quote-button">
+              <a href = "#" class="label label-default big-text">Get a Quote</a>
+            </div>
+        </div>
+
+        <div class="row">                                             
+            <div class ="col-xs-12 text-center">                
+                <a class="top-link" href="#">About Us</a>
+                <span class="top-link">|</span>
+                <a class="top-link" href="#">Services</a>
+                <span class="top-link">|</span>
+                <a class="top-link" href="#">Contact Us</a>                
+            </div>            
+        </div>
+    </div>
+    
+
+    <div id ="main_container">        
+        {% block body %}{% endblock %}
+    </div>
+
+    <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> !-->
+    {% block extra_js %}{% endblock %}
+</body>
+
+<footer>
+    {% block footer %}{% endblock %}
+</footer>
