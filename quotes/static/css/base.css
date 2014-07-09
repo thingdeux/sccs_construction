@@ -1,6 +1,6 @@
 body { 
-    font-family: 'Merriweather', serif;    
-
+    font-family: 'Merriweather', serif;
+    overflow-x: hidden;   
 }
 
 #nav {
@@ -19,7 +19,8 @@ body {
     padding: 5px;
 }
 
-h1 { color: #FFF; }
+h1,h2, h5 { font-weight: 900; }
+#brand { color: #FFF; }
 
 .top-link {
     font-size: 16px;
@@ -61,8 +62,30 @@ h1 { color: #FFF; }
     z-index: 1;
  }
 
+ #body-content {
+    margin-top: -10px;
+ }
+
+ .testimonials {    
+    
+ }
+
  .service-offering {    
     border: 0px !important;
     padding: 2px 4px !important;
     border-radius: 0;
  }
+
+ #service-desc {
+    margin-left: -50px;
+ }
+
+ dd {
+    font-weight: 300;
+ }
+
+ #footie {
+    margin-top: 100px;
+    padding-bottom: 20px;
+    margin-left: 100px;   
+}
