@@ -54,6 +54,14 @@ ROOT_URLCONF = 'Construction.urls'
 WSGI_APPLICATION = 'Construction.wsgi.application'
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
+# List of finder classes that know how to find static files in
+# various locations.
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
+
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases

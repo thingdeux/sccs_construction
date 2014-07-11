@@ -7,10 +7,17 @@ def Index(request):
 
     return render(request, template_name)
 
+def Design(request, design_number):        
+    template_name ="quotes/design" + str(design_number) + ".html"
+
+    return render(request, template_name)
+
 def Quote(request):
     template_name = 'quotes/quote.html'
 
     return render(request, template_name)
+
+
 
 
 '''
