@@ -3,7 +3,22 @@ $carlos-blue: #001637;
 $big-text: 30px;
 $nunito: 'Nunito', sans-serif;
 
-body { font-family: $nunito; }
+body { 
+    font-family: $nunito;    
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        right top,
+        color-stop(0, #E0F0FF),
+        color-stop(0, #CFDFFF)
+    );
+    background-image: -o-linear-gradient(right top, #E0F0FF 0%, #CFDFFF 0%);
+    background-image: -moz-linear-gradient(right top, #E0F0FF 0%, #CFDFFF 0%);
+    background-image: -webkit-linear-gradient(right top, #E0F0FF 0%, #CFDFFF 0%);
+    background-image: -ms-linear-gradient(right top, #E0F0FF 0%, #CFDFFF 0%);
+    background-image: linear-gradient(to right top, #E0F0FF 0%, #CFDFFF 0%);
+
+}
 
 a:link, a:hover, a:active {
     @extend .no-style-link;
@@ -19,7 +34,7 @@ a:link, a:hover, a:active {
     border-color: #666;    
 }
 
-#brand {
+#brand {    
     font-size: 40px;
     color: #000;
 }
@@ -84,7 +99,13 @@ a:link, a:hover, a:active {
 
 #left-footer {
     margin-top: 15px;
-    margin-left: -30px;    
+    margin-left: -15px;    
+}
+
+#right-footer {
+    margin-top: 15px;
+    padding-right: 0;
+    margin-left: 15px;
 }
 
 #shadow-box {
