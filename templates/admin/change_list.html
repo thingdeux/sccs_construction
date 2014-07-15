@@ -62,8 +62,8 @@
         {% block object-tools-items %}
           <li>
             <a href="{% url cl.opts|admin_urlname:'add' %}{% if is_popup %}?_popup=1{% endif %}" class="addlink btn btn-primary">
-              {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
-            </a>
+              {% blocktrans with cl.opts.verbose_name as name %}Manually Create {{ name }}{% endblocktrans %}
+            </a>            
           </li>
         {% endblock %}
       </ul>

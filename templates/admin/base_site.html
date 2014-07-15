@@ -1,0 +1,10 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %} {% trans 'Quote Management System' %}{% endblock %}
+
+{% block branding %}
+    <a href="{% url 'admin:index' %}" class="brand" id="site-name">{% trans 'Quote Management System' %}</a>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

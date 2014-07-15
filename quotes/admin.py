@@ -28,14 +28,13 @@ class ClosedQuoteFilter(admin.SimpleListFilter):
 
 # Register your models here.
 class QuoteAdmin(admin.ModelAdmin):
-    fields = ("date_requested", "first_name", "last_name", "email", "phone", "requiresResponse", "closed", "comments",)
+    fields = ("date_requested", "first_name", "last_name", "email", "phone", 
+              "requiresResponse", "closed", "cost", "comments",)
     #readonly_fields = ('email','phone')
     readonly_fields = ('date_requested', )
-
     list_display = ('email', 'first_name', 'last_name', 
                     'date_requested', 'requiresResponse',)    
-    search_fields = ('last_name',)    
-    list_filter = (ClosedQuoteFilter,)
-    list_export = ('xls', 'csv')    
+    search_fields = ('last_name','email')    
+    list_filter = (ClosedQuoteFilter,)    
     
 admin.site.register(Quote, QuoteAdmin)
