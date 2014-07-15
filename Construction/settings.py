@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = (
+INSTALLED_APPS = (    
     'bootstrap_admin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -92,7 +92,3 @@ USE_TZ = True
 
 if DEBUG:
     STATIC_URL = '/static/'
-
-
-#Requires
-#django-xadmin
