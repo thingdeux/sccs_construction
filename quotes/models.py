@@ -8,7 +8,7 @@ class Quote(models.Model):
     last_name = models.CharField("Last Name", max_length=254, default="", db_index=True)    
     phone = models.CharField("Phone", max_length=30, null=True)
     date_requested = models.DateTimeField("Date Quote Requested", default=datetime.now())
-    comments = models.CharField("Comments", max_length=512, default="")
+    comments = models.CharField("Comments", max_length=512, blank=True)
     requiresResponse = models.BooleanField("Responded To?", default=False)
     closed = models.BooleanField("Quote Closed", default=False)
     cost = models.DecimalField(max_digits=12, decimal_places=2, db_index=True, default=0.00)

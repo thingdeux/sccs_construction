@@ -1,0 +1,43 @@
+{% extends "quotes/skeleton_base.html" %}
+{% load staticfiles %}
+
+{% block extra_css %}<link rel="stylesheet" href="{% static "css/report.css" %}">{% endblock %}
+{% block title %} Quote Report {% endblock %}
+
+{% block body %}
+<div id="report-container" class="container">
+    <table class = "table">
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>E-Mail</th>
+        <th>Phone</th>
+        <th>Requested Date</th>
+        <th>Comments</th>
+        <th>Requires Response</th>
+        <th>Closed</th>
+        <th>Cost</th>
+
+    {% for item in report_results %}    
+        <tr>
+            <td>{{ item.first_name }}</td>
+            <td>{{ item.last_name }}</td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.phone }}</td>
+            <td>{{ item.date_requested }}</td>
+            <td>{{ item.comments }}</td>
+            <td>{{ item.requiresResponse }}</td>
+            <td>{{ item.closed }}</td>
+            <td>${{ item.cost }}</td>
+        </tr>    
+    {% endfor %}
+
+    </table>
+</div>
+{% endblock %}
+
+{% block footer %}
+    <div class="container">
+        <a href="ToXLS/{{exportQuery}}"><span class="label label-info save-button">Save to Excel</span></a>
+        <div class="text-right"><b>Report Generated</b> - {{ datetime }}</div>
+    </div>
+{% endblock %}

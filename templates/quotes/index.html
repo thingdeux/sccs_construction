@@ -1,54 +1,80 @@
+{% extends "quotes/base.html" %}
 {% load staticfiles %}
 
-<head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <title>Carlos Land</title>
-    <link href='http://fonts.googleapis.com/css?family=Merriweather:300,900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static "css/landing.css" %}">    
-    <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/jquery.slick/1.3.6/slick.css"/>   
-</head>
+{% block title %} SCCS {% endblock %}
 
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <div id="title" class="col-xs-12 text-center">
-                Carlos' Exploratory Designs
+{% block extra_css %} 
+
+{% endblock%}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div id="brand" class="col-xs-6 text-left">S.C.C.S</div>
+
+        <div id ="tagline" class="col-xs-6 text-right">Professionalism, Craftmanship, Quality ...</div>
+    </div>    
+
+    <div id="shadow-box">
+        <div id="top-nav" class="row">
+            <div class="col-xs-12 text-center">
+                <a href="#">Home</a> |
+                <a href="#">Construction</a> |
+                <a href="#">Plumbing</a> |
+                <a href="#">Contact Us</a>     
             </div>
         </div>
 
-
-        <div class="row text-center">
-            <div class="col-xs-3"></div>
-            <div class="col-xs-2 design-link">
-                <a href="/1">
-                    <button type="button" class="btn btn-primary btn-lg">Design #1</button>
-                </a>
+        <div id="meat" class="row">        
+            <div class="col-xs-12">            
+                <img id="construction-pic" src="{% static "images/Construction-placeholder.jpg" %}" />
             </div>
 
-            <div class="col-xs-2 design-link">
-                <a href="/2">
-                    <button type="button" class="btn btn-default btn-lg">Design #2</button>
-                </a>
+            <div class="col-xs-4"></div>
+            <div id="headline" class="col-xs-8">
+                <h1 class="text-right">Southern California Construction Services</h1>
+                <h4 class="text-right">Making dreams come true, 10 years and counting!</h4>
+                <a href = "#" id="quote-button" class="label label-info pull-right">Get a Quote</a>
+            </div>
+        </div>
+
+        <div id="tiny-images" class="row text-center">
+            <div class="col-xs-4 small-pad">
+                <span style="color: #FFCCCC" class="glyphicon glyphicon-heart glyphie"></span><br>
+                <a href="#">Our Customers LOVE US! Read our Reviews!</a>
             </div>
 
-            <div class="col-xs-2 design-link">
-                <a href="/3">
-                    <button type="button" class="btn btn-primary btn-lg">Design #3</button>
-                </a>
+            <div class="col-xs-4 small-pad">
+                <span  style="color: #B6C980" class="glyphicon glyphicon-usd glyphie"></span><br>
+                <a href="#">Always the best value for your money!</a>
             </div>
-            <div class="col-xs-3"></div>
+
+            <div class="col-xs-4 small-pad">
+                <span style="color: #B89470" class="glyphicon glyphicon-list-alt glyphie"></span><br>
+
+                <a href="#">We do it all! Take a look at our services.</a>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">        
+        <div id="left-footer" class = "col-xs-6 text-left">
+            Phone: 555-555-5555<br>
+            Questions?: Questions@sccs.com            
+        </div>
+
+        <div id="right-footer" class = "col-xs-6 text-right">
+            Copyright &copy; 2014 Southern California Construction
         </div>        
     </div>
+</div>
 
-    <div class="container">
-        <div class="row text-center">
-            <h4 class="bg-danger warning">FYI: These are all works in progress and not representative of final work.</h4>
-        </div>
-    </div>
+{% endblock %}
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>    
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>    
-</body>
+

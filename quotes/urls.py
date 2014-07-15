@@ -3,9 +3,10 @@ from quotes import views
 
 urlpatterns = patterns('',
 	#Main Index page - Ex: /
-	url(r'^$', views.Index, name='index'),
-    #Design Selector
-    url(r'^(\d+)/$', views.Design, name='designs'),
+	url(r'^$', views.Index, name='index'),    
+    #url(r'robots\.txt$')
     #Quotes viewing page
-	url(r'^quote/$', views.Quote, name='quote'),
+	url(r'^quote/$', views.ViewQuote, name='quote'),
+    url(r'^exportqms/$', views.Export, name='export'),
+    url(r'^exportqms/ToXLS/', views.ExportToXLS, name='exportXLS')
 )

@@ -1,5 +1,13 @@
 from django.contrib import admin
+from django.contrib.contenttypes.models import ContentType
+from django.http import HttpResponseRedirect
+from django.core import serializers
 from quotes.models import Quote
+
+def Export_Selected(modeladmin, request, queryset):
+    selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
+    ct = ContentType.objects.get_for_model(queryset.model)
+    return HttpResponseRedirect("/exportqms/?ct=%s&ids=%s" % (ct.pk, ",".join(selected)))
 
 class ClosedQuoteFilter(admin.SimpleListFilter):
     #Title displayed in the admin sidebar/topbar
@@ -26,15 +34,15 @@ class ClosedQuoteFilter(admin.SimpleListFilter):
         if self.value() == None:            
             return queryset.filter(closed=False)
 
-# Register your models here.
-class QuoteAdmin(admin.ModelAdmin):
+class QuoteAdmin(admin.ModelAdmin):    
     fields = ("date_requested", "first_name", "last_name", "email", "phone", 
               "requiresResponse", "closed", "cost", "comments",)
-    #readonly_fields = ('email','phone')
+    #readonly_fields = ('first_name', 'last_name', 'email','phone', 'date_requested')
     readonly_fields = ('date_requested', )
     list_display = ('email', 'first_name', 'last_name', 
                     'date_requested', 'requiresResponse',)    
     search_fields = ('last_name','email')    
-    list_filter = (ClosedQuoteFilter,)    
+    list_filter = (ClosedQuoteFilter,)   
     
 admin.site.register(Quote, QuoteAdmin)
+admin.site.add_action(Export_Selected)
