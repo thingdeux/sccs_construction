@@ -54,15 +54,18 @@ def ExportToXLS(request):
     ws = wb.add_sheet("Report")
     built_query = []
 
-    for quote_id in request.GET['exp'].split(','):
-        built_query.append(str(quote_id))
+    if request.GET['exp'] == u'All':        
+        query = Quote.objects.all()
+    else:
+        for quote_id in request.GET['exp'].split(','):
+            built_query.append(str(quote_id))
 
-    query = Quote.objects.filter(pk__in=built_query)
-    
+        query = Quote.objects.filter(pk__in=built_query)
+        
     font_style = xlwt.XFStyle()
     font_style.font.bold = True
 
-    #For iteration of columns
+    #For iteration of spreadsheet columns
     col_num = 0
     columns = [
         ("First Name", 3000),
@@ -82,10 +85,10 @@ def ExportToXLS(request):
         ws.col(col_num).width = column_length
         col_num += 1
     
-    #For iteration of rows
+    #For iteration of spreadsheet rows
     row_num = 1
     for quote in query:
-        print quote.date_requested.strftime("%m/%d/%y")
+        #Write each of the values from the query to the spreadsheet   
         ws.write(row_num, 0, quote.first_name)
         ws.write(row_num, 1, quote.last_name)
         ws.write(row_num, 2, quote.email)

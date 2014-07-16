@@ -7,7 +7,7 @@ from quotes.models import Quote
 def Export_Selected(modeladmin, request, queryset):
     selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
     ct = ContentType.objects.get_for_model(queryset.model)
-    return HttpResponseRedirect("/exportqms/?ct=%s&ids=%s" % (ct.pk, ",".join(selected)))
+    return HttpResponseRedirect("/exportqms/?ct=%s&ids=%s" % (ct.pk, ",".join(selected))) 
 
 class ClosedQuoteFilter(admin.SimpleListFilter):
     #Title displayed in the admin sidebar/topbar

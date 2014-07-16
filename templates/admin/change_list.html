@@ -35,24 +35,6 @@
 
 {% block bodyclass %}change-list{% endblock %}
 
-{% if not is_popup %}
-    {% block breadcrumbs %}
-        <ul class="breadcrumb">
-            <li>
-                <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
-                <span class="divider">/</span>
-            </li>
-            <li>
-                <a href="{% url 'admin:app_list' app_label=cl.opts.app_label %}">
-                    {{ app_label|capfirst|escape }}
-                </a>
-                <span class="divider">/</span>
-            </li>
-            <li class="active">{{ cl.opts.verbose_name_plural|capfirst }}</li>
-        </ul>
-    {% endblock %}
-{% endif %}
-
 {% block coltype %}flex{% endblock %}
 
 {% block content %}
@@ -65,12 +47,13 @@
               {% blocktrans with cl.opts.verbose_name as name %}Manually Create {{ name }}{% endblocktrans %}
             </a>            
           </li>
+          <li> <a href="/exportqms/ToXLS/?exp=All" class="btn btn-primary">Get Report of All Quotes</a> </li>
         {% endblock %}
       </ul>
       <script type="text/javascript">django.jQuery("ul.object-tools li a").addClass("btn");</script>
     {% endif %}
   {% endblock %}
-  <div id="content-main">    
+  <div id="content-main">      
     {% if cl.formset.errors %}
         <p class="errornote">
         {% blocktrans count cl.formset.errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
