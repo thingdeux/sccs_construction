@@ -3,7 +3,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseRedirect
 from django.core import serializers
 from django import forms
-from quotes.models import Quote
+from quotes.models import Quote, ContactEmail
 
 def Export_Selected(modeladmin, request, queryset):
     selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
@@ -51,7 +51,12 @@ class QuoteAdmin(admin.ModelAdmin):
               "cost", "comments","requiresResponse", "closed")
     readonly_fields = ('first_name', 'last_name', 'email','phone', 'date_requested')        
     search_fields = ('last_name','email')
+    actions = [CloseQuote, Export_Selected]
+
+
+class ContactEmailAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email')
+    fields = ('name', 'email')    
 
 admin.site.register(Quote, QuoteAdmin)
-admin.site.add_action(CloseQuote)
-admin.site.add_action(Export_Selected)
+admin.site.register(ContactEmail, ContactEmailAdmin)

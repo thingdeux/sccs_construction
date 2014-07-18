@@ -18,7 +18,16 @@ class Quote(models.Model):
     def __unicode__(self):
         return self.email
 
+#HTML form for submission of quotes
 class QuoteSubmissionForm(ModelForm):
     class Meta:
         model = Quote
         fields = ['first_name', 'last_name', 'email', 'phone', 'comments']
+
+#E-Mails that should receive notifications of new quotes
+class ContactEmail(models.Model):
+    name = models.CharField("Name", max_length=254)
+    email = models.EmailField("E-Mail Address", max_length=254, db_index=True)
+
+    def __unicode__(self):
+        return self.name
