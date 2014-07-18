@@ -11,7 +11,14 @@
             {% for field in form %}                
                 <div class="form-group text-center">                    
                     <label for="{{ field.id_for_label }}" class="col-xs-4 control-label">{{ field.label }}</label>
-                    <div class="col-xs-4">{{ field|addcss:"form-control" }}</div>                                        
+                    <div class="col-xs-4">{{ field|addcss:"form-control" }}</div>
+                    {% if field.label == "E-Mail" or field.label == "First Name" or field.label == "Comments" or field.label == "Last Name" %}
+                        <div class="col-xs-2 text-left"><span style="color: red">*</span> Required
+                        {% if field.label == "Comments" %}
+                            <br><small>Tell us a bit about the job</small>
+                        {% endif %}
+                        </div>
+                    {% endif %}                    
                 </div>
             {% endfor %}
             <div class="text-center">

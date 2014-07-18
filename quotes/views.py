@@ -15,6 +15,7 @@ def SubmitQuote(request):
     if request.method == 'POST':
         #Create form instance and pull in data from the front-end
         form = QuoteSubmissionForm(request.POST)
+        
         #Make sure submitted info is valid
         if form.is_valid():
             #Add it
@@ -22,9 +23,27 @@ def SubmitQuote(request):
             last_name = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
             phone = form.cleaned_data['phone']
-            comments = form.cleaned_data['comments']            
+            comments = form.cleaned_data['comments']
+            
+            try:
+                #Try to save DB Record
+                new_record = Quote(
+                    first_name=first_name,
+                    last_name=last_name,
+                    email=email,
+                    phone=phone,
+                    comments=comments,
+                    date_requested=datetime.now(),
+                    requiresResponse=True,
+                    closed=False,
+                    cost=0
+                )
 
-            return HttpResponseRedirect('/')
+                new_record.save()
+            except Exception as err:                
+                print ("Error: " + str(err))
+
+            return HttpResponseRedirect('/')        
 
     template_name = 'quotes/submitQuote.html'
     return render(request, template_name, {'form': form})
@@ -32,24 +51,28 @@ def SubmitQuote(request):
 def Export(request):
     #Get current time for report generated on date/time    
     now = datetime.now()
-    #Get list of selected quotes
-    ids = request.GET['ids']
-    #Build two variables - one a list for the quote query, 
-    #the other a string to pass to the ExportToXLS link should it be clicked.
-    built_query = []
-    export_query = "?exp="
 
-    for quote_id in ids.split(','):
-        built_query.append(str(quote_id))
-        if export_query is "?exp=":
-            export_query = export_query + str(quote_id)
-        else:
-            export_query = export_query + "," + str(quote_id)
+    try:
+        #Get list of selected quotes
+        ids = request.GET['ids']
+        #Build two variables - one a list for the quote query, 
+        #the other a string to pass to the ExportToXLS link should it be clicked.
+        built_query = []
+        export_query = "?exp="
 
-    #DB Query for results
-    results = Quote.objects.filter(pk__in=built_query)    
-    #Render Template
-    template_name = 'quotes/export.html'
+        for quote_id in ids.split(','):
+            built_query.append(str(quote_id))
+            if export_query is "?exp=":
+                export_query = export_query + str(quote_id)
+            else:
+                export_query = export_query + "," + str(quote_id)
+
+        #DB Query for results
+        results = Quote.objects.filter(pk__in=built_query)    
+        #Render Template
+        template_name = 'quotes/export.html'
+    except:
+        print ("Error")
 
     return render(request, template_name, {'report_results': results, 'datetime': now, 'exportQuery': export_query})
 

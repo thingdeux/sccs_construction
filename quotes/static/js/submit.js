@@ -36,7 +36,7 @@ $(document).ready(function() {
     }
 
     function flagErrors(field, boolean) {
-        selected = "#id_" + field
+        selected = "#id_" + field;
         //If there's a length error - flag the box
         if (boolean == true) {
             $(selected).parent().addClass("has-error");            
@@ -53,18 +53,27 @@ $(document).ready(function() {
 
         //Check that the length of each of the required fields is at least 1 character
         for (i=0; i < the_form.length; i++) {
-            if (the_form[i]['name'] != 'csrfmiddlewaretoken') {
+            var name = the_form[i]['name']
+            if ( (name != 'csrfmiddlewaretoken') && (name != 'phone')) {                
                 //If a field value is less than 2 characters then error it up                
                 if ( !checkLength(the_form[i]['value'],2) ) {                     
-                    error_fields.push([the_form[i]['name'], true])
+                    error_fields.push([the_form[i]['name'], true]);
                     no_errors = false;
                 }
-                else { error_fields.push([the_form[i]['name'], false]) }
+                else { error_fields.push([the_form[i]['name'], false]); }
             }
         }                        
 
+        //If there are no errors post the info, otherwise hightlight fields
+        //EXTRA CAREFUL when changing this - hard-coding the values.
         if (no_errors) {
-            alert("Posting");
+            $.post("/quote/", { 
+                    first_name: the_form[1]['value'], 
+                    last_name: the_form[2]['value'], 
+                    email: the_form[3]['value'], 
+                    phone: the_form[4]['value']} 
+                    comments: the_form[5]['value']} 
+                );            
         }
         else {
             //Flag all fields that throw errors
