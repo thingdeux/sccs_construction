@@ -10,6 +10,11 @@ def Export_Selected(modeladmin, request, queryset):
     ct = ContentType.objects.get_for_model(queryset.model)
     return HttpResponseRedirect("/exportqms/?ct=%s&ids=%s" % (ct.pk, ",".join(selected))) 
 
+def CloseQuote(modeladmin, request, queryset):
+    queryset.update(closed="True")
+CloseQuote.short_description = "Close Quote"
+
+
 class ClosedQuoteFilter(admin.SimpleListFilter):
     #Title displayed in the admin sidebar/topbar
     title = "Quote Closed?"
@@ -36,14 +41,17 @@ class ClosedQuoteFilter(admin.SimpleListFilter):
             return queryset.filter(closed=False)
 
 class QuoteAdmin(admin.ModelAdmin):    
-    fields = ("date_requested", "first_name", "last_name", "email", "phone", 
-              "cost", "comments","requiresResponse", "closed")
-    readonly_fields = ('first_name', 'last_name', 'email','phone', 'date_requested')
-    #readonly_fields = ('date_requested', )
+    ordering = ('-requiresResponse','date_requested')  
+    #List
     list_display = ('email', 'first_name', 'last_name', 
                     'date_requested', 'requiresResponse',)    
-    search_fields = ('last_name','email')    
     list_filter = (ClosedQuoteFilter,)
-    
+    #Change form
+    fields = ("date_requested", "first_name", "last_name", "email", "phone", 
+              "cost", "comments","requiresResponse", "closed")
+    readonly_fields = ('first_name', 'last_name', 'email','phone', 'date_requested')        
+    search_fields = ('last_name','email')
+
 admin.site.register(Quote, QuoteAdmin)
+admin.site.add_action(CloseQuote)
 admin.site.add_action(Export_Selected)
