@@ -9,6 +9,12 @@ def Index(request):
     template_name = 'quotes/index.html'
     return render(request, template_name)
 
+def Thanks(request):
+    #Passes the first name from the contact form and thanks the submitter
+    first_name = request.GET['r']
+    template_name = 'quotes/thanks.html'
+    return render(request, template_name, {'name': first_name })
+
 def SubmitQuote(request):
     form = QuoteSubmissionForm()
 
@@ -43,7 +49,7 @@ def SubmitQuote(request):
             except Exception as err:                
                 print ("Error: " + str(err))
 
-            return HttpResponseRedirect('/')        
+            return HttpResponseRedirect('/thanks/?r=' + str(first_name))        
 
     template_name = 'quotes/submitQuote.html'
     return render(request, template_name, {'form': form})

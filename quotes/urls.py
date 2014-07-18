@@ -6,6 +6,7 @@ urlpatterns = patterns('',
 	url(r'^$', views.Index, name='index'),        
     #Quotes viewing page
 	url(r'^quote/$', views.SubmitQuote, name='quote'),
+    url(r'^thanks/$', views.Thanks, name='quote'),
     #Quotes submission page
     #Quotes Management System URLS
     url(r'^exportqms/$', views.Export, name='export'),
