@@ -11,7 +11,10 @@
 
 <div class="container">
     <div class="row">
-        <div id="brand" class="col-xs-6 text-left">S.C.C.S</div>
+        <div id="brand" class="col-xs-6 text-left">
+            <img  src="{% static "images/Logo-Small.png" %}" alt="SCCS Logo">
+            S.C.C.S
+        </div>
 
         <div id ="tagline" class="col-xs-6 text-right">Professionalism, Craftmanship, Quality ...</div>
     </div>    
@@ -19,14 +22,15 @@
     <div id="shadow-box">
         <div id="top-nav" class="row">
             <div class="col-xs-12 text-center">
-                <a href="#">Home</a> |
+                <a href="/">Home</a> |
                 <a href="#">Construction</a> |
                 <a href="#">Plumbing</a> |
                 <a href="#">Contact Us</a>     
             </div>
         </div>
 
-        <div id="meat" class="row">        
+        {% block content %}
+        <div id="meat" class="row">                                
             <div class="col-xs-12">            
                 <img id="construction-pic" src="{% static "images/Construction-placeholder.jpg" %}" />
             </div>
@@ -35,7 +39,7 @@
             <div id="headline" class="col-xs-8">
                 <h1 class="text-right">Southern California Construction Services</h1>
                 <h4 class="text-right">Making dreams come true, 10 years and counting!</h4>
-                <a href = "#" id="quote-button" class="label label-info pull-right">Get a Quote</a>
+                <a href = "quote" id="quote-button" class="label label-info pull-right">Get a Quote</a>
             </div>
         </div>
 
@@ -55,11 +59,11 @@
 
                 <a href="#">We do it all! Take a look at our services.</a>
             </div>
-        </div>
+        </div>                
+        {% endblock %}
     </div>
 
-
-    </div>
+    
 </div>
 
 <div class="container">

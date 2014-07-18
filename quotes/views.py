@@ -1,17 +1,33 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from quotes.models import Quote
+from django import forms
+from quotes.models import Quote, QuoteSubmissionForm
 from datetime import datetime
-
 
 # Create your views here.
 def Index(request):
     template_name = 'quotes/index.html'
     return render(request, template_name)
 
-def ViewQuote(request):
-    template_name = 'quotes/quote.html'
-    return render(request, template_name)
+def SubmitQuote(request):
+    form = QuoteSubmissionForm()
+
+    if request.method == 'POST':
+        #Create form instance and pull in data from the front-end
+        form = QuoteSubmissionForm(request.POST)
+        #Make sure submitted info is valid
+        if form.is_valid():
+            #Add it
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            email = form.cleaned_data['email']
+            phone = form.cleaned_data['phone']
+            comments = form.cleaned_data['comments']            
+
+            return HttpResponseRedirect('/')
+
+    template_name = 'quotes/submitQuote.html'
+    return render(request, template_name, {'form': form})
 
 def Export(request):
     #Get current time for report generated on date/time    

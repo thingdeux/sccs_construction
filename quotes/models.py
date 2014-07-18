@@ -1,5 +1,7 @@
 from django.db import models
 from datetime import datetime
+from django.forms import ModelForm
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 class Quote(models.Model):    
@@ -8,10 +10,15 @@ class Quote(models.Model):
     last_name = models.CharField("Last Name", max_length=254, default="", db_index=True)    
     phone = models.CharField("Phone", max_length=30, null=True)
     date_requested = models.DateTimeField("Date Quote Requested", default=datetime.now())
-    comments = models.CharField("Comments", max_length=512, blank=True)
+    comments = models.TextField("Comments", max_length=512, blank=True)
     requiresResponse = models.BooleanField("Responded To?", default=False)
     closed = models.BooleanField("Quote Closed", default=False)
     cost = models.DecimalField(max_digits=12, decimal_places=2, db_index=True, default=0.00)
 
     def __unicode__(self):
         return self.email
+
+class QuoteSubmissionForm(ModelForm):
+    class Meta:
+        model = Quote
+        fields = ['first_name', 'last_name', 'email', 'phone', 'comments']

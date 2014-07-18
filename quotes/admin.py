@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseRedirect
 from django.core import serializers
+from django import forms
 from quotes.models import Quote
 
 def Export_Selected(modeladmin, request, queryset):
@@ -36,13 +37,13 @@ class ClosedQuoteFilter(admin.SimpleListFilter):
 
 class QuoteAdmin(admin.ModelAdmin):    
     fields = ("date_requested", "first_name", "last_name", "email", "phone", 
-              "requiresResponse", "closed", "cost", "comments",)
-    #readonly_fields = ('first_name', 'last_name', 'email','phone', 'date_requested')
-    readonly_fields = ('date_requested', )
+              "cost", "comments","requiresResponse", "closed")
+    readonly_fields = ('first_name', 'last_name', 'email','phone', 'date_requested')
+    #readonly_fields = ('date_requested', )
     list_display = ('email', 'first_name', 'last_name', 
                     'date_requested', 'requiresResponse',)    
     search_fields = ('last_name','email')    
-    list_filter = (ClosedQuoteFilter,)   
+    list_filter = (ClosedQuoteFilter,)
     
 admin.site.register(Quote, QuoteAdmin)
 admin.site.add_action(Export_Selected)
