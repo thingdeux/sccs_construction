@@ -2,83 +2,39 @@
 {% load staticfiles %}
 
 {% block title %} SCCS {% endblock %}
-
-{% block extra_css %} 
-
-{% endblock%}
-
+  
 {% block body %}
-
-<div class="container">
-    <div class="row">
-        <div id="brand" class="col-xs-6 text-left">
-            <img  src="{% static "images/Logo-Small.png" %}" alt="SCCS Logo">
-            S.C.C.S
+    <div id="meat" class="row">                                
+        <div class="col-xs-12">            
+            <img id="construction-pic" src="{% static "images/construction.jpg" %}" />
         </div>
 
-        <div id ="tagline" class="col-xs-6 text-right">Professionalism, Craftmanship, Quality ...</div>
-    </div>    
-
-    <div id="shadow-box">
-        <div id="top-nav" class="row">
-            <div class="col-xs-12 text-center">
-                <a href="/">Home</a> |
-                <a href="#">Construction</a> |
-                <a href="#">Plumbing</a> |
-                <a href="#">Contact Us</a>     
-            </div>
+        <div class="col-xs-4"></div>
+        <div id="headline" class="col-xs-8">
+            <h1 class="text-right">Southern California Construction Services</h1>
+            <h4 class="text-right">Making dreams come true, 10 years and counting!</h4>
+            <a href = "quote" id="quote-button" class="label label-info pull-right">Get a Quote</a>
         </div>
-
-        {% block content %}
-        <div id="meat" class="row">                                
-            <div class="col-xs-12">            
-                <img id="construction-pic" src="{% static "images/construction.jpg" %}" />
-            </div>
-
-            <div class="col-xs-4"></div>
-            <div id="headline" class="col-xs-8">
-                <h1 class="text-right">Southern California Construction Services</h1>
-                <h4 class="text-right">Making dreams come true, 10 years and counting!</h4>
-                <a href = "quote" id="quote-button" class="label label-info pull-right">Get a Quote</a>
-            </div>
-        </div>
-
-        <div id="tiny-images" class="row text-center">
-            <div class="col-xs-4 small-pad">
-                <span style="color: #FFCCCC" class="glyphicon glyphicon-heart glyphie"></span><br>
-                <a href="#">Our Customers LOVE US! Read our Reviews!</a>
-            </div>
-
-            <div class="col-xs-4 small-pad">
-                <span  style="color: #B6C980" class="glyphicon glyphicon-usd glyphie"></span><br>
-                <a href="#">Always the best value for your money!</a>
-            </div>
-
-            <div class="col-xs-4 small-pad">
-                <span style="color: #B89470" class="glyphicon glyphicon-list-alt glyphie"></span><br>
-
-                <a href="#">We do it all! Take a look at our services.</a>
-            </div>
-        </div>                
-        {% endblock %}
     </div>
 
-    
-</div>
-
-<div class="container">
-    <div class="row">        
-        <div id="left-footer" class = "col-xs-6 text-left">
-            Phone: 555-555-5555<br>
-            Questions?: Questions@sccs.com            
+    <div id="tiny-images" class="row text-center">
+        <div class="col-xs-4 small-pad">
+            <span style="color: #FFCCCC" class="glyphicon glyphicon-heart glyphie"></span><br>
+            <a href="#">Our Customers LOVE US! Read our Reviews!</a>
         </div>
 
-        <div id="right-footer" class = "col-xs-6 text-right">
-            Copyright &copy; 2014 Southern California Construction
-        </div>        
-    </div>
-</div>
+        <div class="col-xs-4 small-pad">
+            <span  style="color: #B6C980" class="glyphicon glyphicon-usd glyphie"></span><br>
+            <a href="#">Always the best value for your money!</a>
+        </div>
 
+        <div class="col-xs-4 small-pad">
+            <span style="color: #B89470" class="glyphicon glyphicon-list-alt glyphie"></span><br>
+
+            <a href="#">We do it all! Take a look at our services.</a>
+        </div>
+    </div>                
 {% endblock %}
+
 
 

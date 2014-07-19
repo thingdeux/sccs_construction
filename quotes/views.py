@@ -5,10 +5,19 @@ from django import forms
 from quotes.models import Quote, QuoteSubmissionForm, sendMailToContacts
 from django.utils.timezone import now
 
-# Create your views here.
-def Index(request):
-    template_name = 'quotes/index.html'
-    return render(request, template_name)
+#Basic Direct to Template Views.
+def Index(request):    
+    return render(request, 'quotes/index.html')
+
+def Services(request):    
+    return render(request, 'quotes/services.html')
+
+def Contact(request):    
+    return render(request, 'quotes/contact.html')
+
+def AboutUs(request):    
+    return render(request, 'quotes/aboutus.html')
+
 
 def Thanks(request):
     #Passes the first name from the contact form and thanks the submitter
