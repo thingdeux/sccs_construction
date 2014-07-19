@@ -21,9 +21,9 @@ class Quote(models.Model):
         return self.email
 
 #HTML form for submission of quotes
-class QuoteSubmissionForm(ModelForm):
+class QuoteSubmissionForm(ModelForm):    
     class Meta:
-        model = Quote
+        model = Quote            
         fields = ['first_name', 'last_name', 'email', 'phone', 'comments']
 
 #E-Mails that should receive notifications of new quotes

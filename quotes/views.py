@@ -16,15 +16,13 @@ def Thanks(request):
     template_name = 'quotes/thanks.html'
     return render(request, template_name, {'name': first_name })
 
-def SubmitQuote(request):
-    form = QuoteSubmissionForm()
-
-    if request.method == 'POST':
+def SubmitQuote(request):    
+    if request.method == 'POST':        
         #Create form instance and pull in data from the front-end
         form = QuoteSubmissionForm(request.POST)
         
         #Make sure submitted info is valid
-        if form.is_valid():
+        if form.is_valid():            
             #Add it
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
@@ -56,10 +54,16 @@ def SubmitQuote(request):
             except Exception as err:                
                 print ("Error: " + str(err))
 
-            return HttpResponseRedirect('/thanks/?r=' + str(first_name))        
+            return HttpResponseRedirect('/thanks/?r=' + str(first_name))
+    else:
+        form = QuoteSubmissionForm()
 
+    
     template_name = 'quotes/submitQuote.html'
-    return render(request, template_name, {'form': form})
+    return render(request, template_name, {'form': form})    
+
+
+    
 
 def Export(request):
     #Get current time for report generated on date/time    

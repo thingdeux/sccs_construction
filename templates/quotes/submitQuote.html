@@ -2,19 +2,32 @@
 {% load staticfiles %}
 {% load custom_filters %}
 
-{% block extra_js %}<script src="{% static "js/submit.js" %}"></script>{% endblock %}
-
 {% block content %}
-    <div id="meat" style="overflow-y: scroll;"class="row">
-        <form id="quoteForm" class="form-horizontal" role="form-inline" action ="{{ action }}" method="POST">            
+    <div id="meat" style="overflow-y: scroll;"class="row">                       
+        <form id="quoteForm" class="form-horizontal" role="form-inline" action ="{{ action }}" method="POST">                                        
             {% csrf_token %}
             {% for field in form %}                
-                <div class="form-group text-center">                    
-                    <label for="{{ field.id_for_label }}" class="col-sm-4 col-md-4 control-label">{{ field.label }}</label>
-                    <div class="col-sm-6 col-md-4">{{ field|addcss:"form-control" }}</div>
+                <div class="form-group text-center">                                        
+                        <label for="{{ field.id_for_label }}" class="col-sm-4 col-md-4 control-label">{{ field.label }}</label>                                        
+                        {% if form.errors and not field.label == "Phone"%}
+                            {% if field.errors %}                                
+                                <div class="col-sm-6 col-md-4 has-error">{{ field|addcss:"form-control" }}</div>                                
+                            {% else %}
+                                <div class="col-sm-6 col-md-4">{{ field|addcss:"form-control" }}</div>
+                            {% endif %}
+                                                                                                                                                                    
+                        {% else %}                                                
+                            <div class="col-sm-6 col-md-4">{{ field|addcss:"form-control" }}</div>
+                        {% endif %}
+                        
 
                     {% if field.label == "E-Mail" or field.label == "First Name" or field.label == "Comments" or field.label == "Last Name" %}                        
                         <div class="col-xs-8 col-sm-2 col-md-2 text-left"><span style="color: red">*</span> Required
+                        {% if form.errors %}
+                            {% for error in field.errors %}                            
+                                <br><span class="text-danger"><small>{{ error }}</small></span>
+                            {% endfor %}                        
+                        {% endif %}
                         {% if field.label == "Comments" %}
                             <br><small>Tell us a bit about the job</small>
                         {% endif %}
@@ -29,4 +42,5 @@
             </div>
         </form>
     </div>
+
 {% endblock %}

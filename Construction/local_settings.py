@@ -28,9 +28,9 @@ if DEBUG:
     EMAIL_HOST_USER = cred['EMAIL-DEBUG']['USERNAME']
     EMAIL_HOST_PASSWORD = cred['EMAIL-DEBUG']['PASSWORD']
     EMAIL_PORT = cred['EMAIL-DEBUG']['PORT']
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     #Outputs E-Mail to the console
-    #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 else:
     STATIC_URL = "http://jfff/static/"
