@@ -80,15 +80,23 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
+USE_I18N = False
 
 USE_L10N = True
 
 USE_TZ = True
+    
+DEFAULT_CHARSET = 'utf-8'
+TIME_ZONE = "America/Los_Angeles"
 
+##################
+# LOCAL SETTINGS #
+##################
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
-
-if DEBUG:
-    STATIC_URL = '/static/'
+# Allow any settings to be defined in local_settings.py which should be
+# ignored in your version control system allowing for settings to be
+# defined per machine.
+try:
+    from local_settings import *
+except ImportError:
+    pass

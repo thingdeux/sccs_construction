@@ -1,0 +1,17 @@
+<html>
+<body>    
+    <h2><u>Quote Information:</u></h2><br>
+    
+    E-Mail: <a href="mailto:{{ quote.email }}">{{ quote.email}}</a><br>
+    Name: {{ quote.first_name }}&nbsp;{{quote.last_name}}<br><br><br>
+
+    {% if quote.phone|length > 0 %}
+    Phone: {{ quote.phone }}<br>
+    {% endif %}
+
+    Comments: {{ quote.comments }}<br><br>
+
+    <p>For more information click <a href="#">here</a></p>
+
+</body>
+</html>

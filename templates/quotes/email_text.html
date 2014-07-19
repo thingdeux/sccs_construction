@@ -1,0 +1,9 @@
+
+E-Mail: {{ quote.email}}
+Name: {{ quote.first_name }} {{quote.last_name}}
+
+{% if quote.phone|length > 0 %}
+Phone: {{ quote.phone }}
+{% endif %}
+
+Comments: {{ quote.comments }}

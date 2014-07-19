@@ -1,8 +1,9 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from django import forms
-from quotes.models import Quote, QuoteSubmissionForm
-from datetime import datetime
+from quotes.models import Quote, QuoteSubmissionForm, sendMailToContacts
+from django.utils.timezone import now
 
 # Create your views here.
 def Index(request):
@@ -39,13 +40,19 @@ def SubmitQuote(request):
                     email=email,
                     phone=phone,
                     comments=comments,
-                    date_requested=datetime.now(),
-                    requiresResponse=True,
+                    date_requested=now(),
+                    requiresResponse=False,
                     closed=False,
                     cost=0
                 )
-
+                #Save new quote record entry
                 new_record.save()
+
+                generated_html = render_to_string('quotes/email_html.html', {'quote': new_record})              
+                generated_txt = render_to_string('quotes/email_text.html', {'quote': new_record})
+                first_name = str(new_record.first_name)                
+                sendMailToContacts(first_name, generated_html, generated_txt)
+
             except Exception as err:                
                 print ("Error: " + str(err))
 
@@ -78,7 +85,7 @@ def Export(request):
         #Render Template
         template_name = 'quotes/export.html'
     except:
-        print ("Error")
+        print ("Export Error")
 
     return render(request, template_name, {'report_results': results, 'datetime': now, 'exportQuery': export_query})
 
