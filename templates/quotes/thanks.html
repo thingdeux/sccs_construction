@@ -1,9 +1,7 @@
-{% extends "quotes/index.html" %}
-{% load staticfiles %}
-{% load custom_filters %}
+{% extends "quotes/base.html" %}
+{% block title %} Thanks! {% endblock %}
 
-
-{% block content %}
+{% block body %}
     <div id="meat" class="row text-center">
         <h1> Thanks for your consideration {{name}},<br> we will contact you soon </h1>                    
     </div>
