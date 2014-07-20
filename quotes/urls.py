@@ -7,9 +7,7 @@ urlpatterns = patterns('',
     #Services page - Static Template - Ex: /construction
     url(r'^services/$', views.Services, name='services'),
     #About us page - Static Template - Ex: /aboutus
-    url(r'^aboutus/$', views.AboutUs, name='aboutus'),
-    #Contact Us Page - Static Template - Ex: /contact
-    url(r'^contact/$', views.Contact, name='contact'),
+    url(r'^aboutus/$', views.AboutUs, name='aboutus'),    
     #Quotes submission URLS
 	url(r'^quote/$', views.SubmitQuote, name='quote'),
     url(r'^thanks/$', views.Thanks, name='thanks'),    

@@ -26,7 +26,14 @@ a:link, a:hover, a:active {
 }
 
 .small-pad { padding: 2px;}
+.small-bottom-margin { margin-bottom: 20px;}
 .no-style-link { text-decoration: none; }
+
+#shadow-box {
+    -webkit-box-shadow: 0px 0px 30px 0px rgba(50, 50, 50, 1);
+    -moz-box-shadow:    0px 0px 30px 0px rgba(50, 50, 50, 1);
+    box-shadow:         0px 0px 30px 0px rgba(50, 50, 50, 1);
+}
 
 .border-box {
     border: 1px solid #ccc;
@@ -48,12 +55,14 @@ a:link, a:hover, a:active {
     @extend .border-box;    
     background: $carlos-blue;  
     color: $text-color;
+    position: relative;
+    z-index: 20;
 
     a:link, a:hover, a:active {
         font-weight: bolder;
         font-size: 15px;
         margin-left: 10px;
-    }
+    }    
 }
 
 
@@ -66,7 +75,7 @@ a:link, a:hover, a:active {
 
 #headline {
     color: white;
-    z-index: 10; 
+    z-index: 10;
     position: relative;
 }
 
@@ -108,9 +117,18 @@ a:link, a:hover, a:active {
     margin-left: 15px;
 }
 
-#shadow-box {
-    -webkit-box-shadow: 0px 0px 30px 0px rgba(50, 50, 50, 1);
-    -moz-box-shadow:    0px 0px 30px 0px rgba(50, 50, 50, 1);
-    box-shadow:         0px 0px 30px 0px rgba(50, 50, 50, 1);
+#service-lists {
+    max-width: 540px;
+    margin-bottom: 30px;
 }
 
+#handyman {
+    position: absolute;
+    z-index: 0;
+    margin-top: -44px;
+    margin-left: -50px;        
+}
+
+@media (max-width: 600px) {
+    #handyman { display: none;}
+}

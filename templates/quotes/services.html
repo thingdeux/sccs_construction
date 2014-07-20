@@ -4,7 +4,46 @@
 {% block title %} SCCS - Services {% endblock %}
 
 {% block body %}
-    <div id="meat" class="row">
-        Services
+    <div id="meat" class="row" >
+        
+        <img id="handyman" src="{% static "images/handyman.png" %}" />
+        
+        <div class="container">
+            <div class="col-xs-12 text-right small-bottom-margin"><h2>At S.C.C.S we can do it all!</h2></div>
+        </div>    
+
+        <div id="service-lists" class="container pull-right">
+            <div class = "col-xs-12 col-sm-6">            
+                <div class="panel panel-primary">
+                    <div class="panel-heading">            
+                        <h2 class="text-center  panel-title">Plumbing</h2>
+                    </div>                
+
+                    <ul class="list-group text-center">
+                        <li class="list-group-item">Repair</li>                        
+                        <li class="list-group-item">Welding</li>
+                        <li class="list-group-item">Installation</li>
+                        <li class="list-group-item">Fitting</li>
+                    </ul>
+                </div>
+
+            </div>
+            
+            <div class = "col-xs-12 col-sm-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">            
+                        <h2 class="text-center  panel-title">Construction</h2>
+                    </div>
+
+                    <ul class="list-group text-center">
+                        <li class="list-group-item">Design</li>
+                        <li class="list-group-item">Scaffolding</li>
+                        <li class="list-group-item">Ditch Digging</li>
+                        <li class="list-group-item">Home Repair</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+             
     </div>
 {% endblock %}

@@ -12,12 +12,8 @@ def Index(request):
 def Services(request):    
     return render(request, 'quotes/services.html')
 
-def Contact(request):    
-    return render(request, 'quotes/contact.html')
-
 def AboutUs(request):    
     return render(request, 'quotes/aboutus.html')
-
 
 def Thanks(request):
     #Passes the first name from the contact form and thanks the submitter
@@ -31,8 +27,7 @@ def SubmitQuote(request):
         form = QuoteSubmissionForm(request.POST)
         
         #Make sure submitted info is valid
-        if form.is_valid():            
-            #Add it
+        if form.is_valid():                        
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
@@ -55,8 +50,10 @@ def SubmitQuote(request):
                 #Save new quote record entry
                 new_record.save()
 
+                #Build E-Mail Templates
                 generated_html = render_to_string('quotes/email_html.html', {'quote': new_record})              
                 generated_txt = render_to_string('quotes/email_text.html', {'quote': new_record})
+                #Get first name to pass to /thanks
                 first_name = str(new_record.first_name)                
                 sendMailToContacts(first_name, generated_html, generated_txt)
 
