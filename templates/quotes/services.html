@@ -3,6 +3,15 @@
 
 {% block title %} SCCS - Services {% endblock %}
 
+{% block extra_css %} 
+<style>
+     @media (max-width: 764px) {
+    #meat { height: auto;}
+    #handyman { display: none;}
+}
+</style>
+{% endblock %}
+
 {% block body %}
     <div id="meat" class="row" >
         
@@ -36,6 +45,7 @@
                     </div>
 
                     <ul class="list-group text-center">
+                        <li class="list-group-item">Home Additions</li>
                         <li class="list-group-item">Design</li>
                         <li class="list-group-item">Scaffolding</li>
                         <li class="list-group-item">Ditch Digging</li>

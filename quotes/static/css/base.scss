@@ -86,7 +86,7 @@ a:link, a:hover, a:active {
     z-index: 1;
 }
 
-#tiny-images {
+#tiny-images, #instructions {
     @extend .border-box;    
     background-color: $carlos-blue;    
     color: white;
@@ -129,6 +129,8 @@ a:link, a:hover, a:active {
     margin-left: -50px;        
 }
 
-@media (max-width: 600px) {
-    #handyman { display: none;}
+#about-text {
+    padding-left: 25px;
+    padding-right: 25px;
 }
+

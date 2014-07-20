@@ -33,5 +33,13 @@ if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 else:
-    STATIC_URL = "http://jfff/static/"
-    STATIC_ROOT = "/home/thingdeux/webapps/sccsstatic/"
+    STATIC_URL = "http://johnson.guru/static/"
+    STATIC_ROOT = "/home/thingdeux/webapps/carlos_static/"    
+    EMAIL_USE_TLS = True
+    EMAIL_HOST = cred['EMAIL-DEBUG']['HOST']
+    EMAIL_HOST_USER = cred['EMAIL-DEBUG']['USERNAME']
+    EMAIL_HOST_PASSWORD = cred['EMAIL-DEBUG']['PASSWORD']
+    EMAIL_PORT = cred['EMAIL-DEBUG']['PORT']
+    #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    #Outputs E-Mail to the console
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

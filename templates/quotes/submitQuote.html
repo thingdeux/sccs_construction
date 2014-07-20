@@ -4,8 +4,14 @@
 
 {% block title %} SCCS - Get a Quote {% endblock %}
 
+{% block extra_css %} 
+<style>
+    #meat { height: auto; }       
+</style>
+{% endblock %}
+
 {% block body %}
-    <div id="meat" style="overflow-y: scroll;"class="row">                       
+    <div id="meat" class="row">                       
         <form id="quoteForm" class="form-horizontal" role="form-inline" action ="{{ action }}" method="POST">                                        
             {% csrf_token %}
             {% for field in form %}                
@@ -43,6 +49,16 @@
                 <input id="submitButton" class="btn btn-primary" type="submit" value="Submit" />
             </div>
         </form>
+    </div>
+
+    <div id="instructions" class="row text-center">
+        <p>Getting a quote for your latest project or problem has never been easier!</h4><p>
+        <p>
+        <span class="glyphicon glyphicon-flash" style="color: yellow"></span>
+            Tell us about the job with as much detail as you can and expect a response within 2 business days.
+        <span class="glyphicon glyphicon-flash" style="color: yellow"></span>
+        </p>
+
     </div>
 
 {% endblock %}
