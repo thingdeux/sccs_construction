@@ -4,6 +4,7 @@ from django.template.loader import render_to_string
 from django import forms
 from quotes.models import Quote, QuoteSubmissionForm, sendMailToContacts
 from django.utils.timezone import now
+from quotes.log import log
 
 #Basic Direct to Template Views.
 def Index(request):    
@@ -58,7 +59,7 @@ def SubmitQuote(request):
                 sendMailToContacts(first_name, generated_html, generated_txt)
 
             except Exception as err:                
-                print ("Error: " + str(err))
+                log(err)
 
             return HttpResponseRedirect('/thanks/?r=' + str(first_name))
     else:
@@ -94,8 +95,8 @@ def Export(request):
         results = Quote.objects.filter(pk__in=built_query)    
         #Render Template
         template_name = 'quotes/export.html'
-    except:
-        print ("Export Error")
+    except Exception as err:
+        log(err)
 
     return render(request, template_name, {'report_results': results, 'datetime': now, 'exportQuery': export_query})
 

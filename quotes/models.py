@@ -4,6 +4,7 @@ from django.forms import ModelForm
 from django.core.exceptions import ValidationError
 from django.core import mail
 from django.core.mail import EmailMultiAlternatives
+from quotes.log import log
 
 # Create your models here.
 class Quote(models.Model):    
@@ -35,7 +36,7 @@ class ContactEmail(models.Model):
         return self.email
 
 
-def sendMailToContacts(name, html, text):    
+def sendMailToContacts(name, html, text):        
     #Get a list of all of the current contactees
     contacts = ContactEmail.objects.all()    
     email_addresses = []
@@ -43,16 +44,15 @@ def sendMailToContacts(name, html, text):
     subject = str(name) + " has requested a Quote on SCCS"
     text_message = text
     html_message = html
-    from_addr = "uberbreaker@gmail.com"
+    from_addr = "admin@johnson.guru"
 
     #Create List of e-mail addresses
     for address in contacts:
         email_addresses.append(address.email)
 
-
     try:
         #Get django e-mail settings        
-        connection = mail.get_connection()        
+        connection = mail.get_connection()      
         #Open E-Mail server connection        
         connection.open()        
         #Append RAW Text
@@ -64,5 +64,5 @@ def sendMailToContacts(name, html, text):
 
         connection.close()
     except Exception as err:
-        connection.close()
-        print err
+        connection.close()        
+        log(err)
