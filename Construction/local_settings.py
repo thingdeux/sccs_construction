@@ -25,23 +25,20 @@ if DEBUG:
     # Static files (CSS, JavaScript, Images)
     # https://docs.djangoproject.com/en/1.6/howto/static-files/
     STATIC_URL = '/static/'
-    EMAIL_USE_TLS = True
+    #EMAIL_USE_TLS = True
     EMAIL_HOST = cred['EMAIL-DEBUG']['HOST']
     EMAIL_HOST_USER = cred['EMAIL-DEBUG']['USERNAME']
     EMAIL_HOST_PASSWORD = cred['EMAIL-DEBUG']['PASSWORD']
     EMAIL_PORT = cred['EMAIL-DEBUG']['PORT']
     #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     #Outputs E-Mail to the console
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    
 else:
     STATIC_URL = "http://johnson.guru/static/"
     STATIC_ROOT = "/home/thingdeux/webapps/carlos_static/"    
-    EMAIL_USE_TLS = True
-    EMAIL_HOST = cred['EMAIL-DEBUG']['HOST']
-    EMAIL_HOST_USER = cred['EMAIL-DEBUG']['USERNAME']
-    EMAIL_HOST_PASSWORD = cred['EMAIL-DEBUG']['PASSWORD']
-    EMAIL_PORT = cred['EMAIL-DEBUG']['PORT']
-    #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    #Outputs E-Mail to the console
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    EMAIL_HOST = cred['EMAIL-PROD']['HOST']
+    EMAIL_HOST_USER = cred['EMAIL-PROD']['USERNAME']
+    EMAIL_HOST_PASSWORD = cred['EMAIL-PROD']['PASSWORD']
+    DEFAULT_FROM_EMAIL = cred['EMAIL-PROD']['FROM']
+    SERVER_EMAIL = cred['EMAIL-PROD']['FROM']    
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'     
