@@ -6,7 +6,9 @@ PROJECT_ROOT = path.dirname(path.abspath(__file__))
 
 if "webfaction" in ENVIRONMENT_NAME:
     DEBUG = False    
+    TEMPLATE_DEBUG = False
 else:
+    TEMPLATE_DEBUG = True
     DEBUG = True
 
 # Make these unique, and don't share it with anybody.

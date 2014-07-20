@@ -19,11 +19,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '0x01g*78ynk9%ebmxe5-2jcfxp7y5xnx&o@00ebx0)rc=a+z@l'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-TEMPLATE_DEBUG = True
-
 ALLOWED_HOSTS = [
                  '127.0.0.1', '0.0.0.0'
                  '.johnson.guru', '.johnson.guru'
