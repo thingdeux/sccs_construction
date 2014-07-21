@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.template.loader import render_to_string
 from django import forms
@@ -16,11 +16,16 @@ def Services(request):
 def AboutUs(request):    
     return render(request, 'quotes/aboutus.html')
 
+#Dynamic URL end points
 def Thanks(request):
     #Passes the first name from the contact form and thanks the submitter
-    first_name = request.GET['r']
-    template_name = 'quotes/thanks.html'
-    return render(request, template_name, {'name': first_name })
+    try:
+        first_name = request.GET['r'][:254]
+        template_name = 'quotes/thanks.html'
+        return render(request, template_name, {'name': first_name })
+    except:
+        #If no name is passed return 404
+        raise Http404
 
 def SubmitQuote(request):    
     if request.method == 'POST':        
