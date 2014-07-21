@@ -73,10 +73,7 @@ def SubmitQuote(request):
     
     template_name = 'quotes/submitQuote.html'
     return render(request, template_name, {'form': form})    
-
-
     
-
 def Export(request):
     #Get current time for report generated on date/time    
     now = datetime.now()
