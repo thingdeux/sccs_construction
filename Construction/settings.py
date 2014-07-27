@@ -45,6 +45,14 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'Construction.urls'
 
 WSGI_APPLICATION = 'Construction.wsgi.application'
+
+TEMPLATE_LOADERS = (
+    ('django.template.loaders.cached.Loader', (
+        "django.template.loaders.filesystem.Loader",
+        "django.template.loaders.app_directories.Loader",
+    )),
+)
+
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 # List of finder classes that know how to find static files in
