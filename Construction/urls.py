@@ -4,8 +4,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:    
-    url(r'^qms/', include(admin.site.urls)),        
-    url(r'^', include('quotes.urls')),    
+    url(r'^qms/', include(admin.site.urls)),  # noqa
+    url(r'^', include('quotes.urls')),
 
 )

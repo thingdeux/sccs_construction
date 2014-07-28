@@ -16,20 +16,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
-ALLOWED_HOSTS = [                 
-                 '.johnson.guru', '.johnson.guru'
-                ]
+ALLOWED_HOSTS = ['.johnson.guru', '.johnson.guru']
 
 # Application definition
 
-INSTALLED_APPS = (    
+INSTALLED_APPS = (
     'bootstrap_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',    
+    'django.contrib.staticfiles',
     'quotes',
 )
 
@@ -86,7 +84,7 @@ USE_I18N = False
 USE_L10N = True
 
 USE_TZ = True
-    
+
 DEFAULT_CHARSET = 'utf-8'
 TIME_ZONE = "America/Los_Angeles"
 

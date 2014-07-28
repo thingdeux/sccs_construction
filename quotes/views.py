@@ -1,47 +1,52 @@
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.template.loader import render_to_string
-from django import forms
 from quotes.models import Quote, QuoteSubmissionForm, sendMailToContacts
 from django.utils.timezone import now
 from quotes.log import log
+from datetime import datetime
 
-#Basic Direct to Template Views.
-def Index(request):    
+
+# Basic Direct to Template Views.
+def Index(request):
     return render(request, 'quotes/index.html')
 
-def Services(request):    
+
+def Services(request):
     return render(request, 'quotes/services.html')
 
-def AboutUs(request):    
+
+def AboutUs(request):
     return render(request, 'quotes/aboutus.html')
 
-#Dynamic URL end points
+
+# Dynamic URL end points
 def Thanks(request):
-    #Passes the first name from the contact form and thanks the submitter
+    # Passes the first name from the contact form and thanks the submitter
     try:
         first_name = request.GET['r'][:254]
         template_name = 'quotes/thanks.html'
-        return render(request, template_name, {'name': first_name })
+        return render(request, template_name, {'name': first_name})
     except:
-        #If no name is passed return 404
+        # If no name is passed return 404
         raise Http404
 
-def SubmitQuote(request):    
-    if request.method == 'POST':        
-        #Create form instance and pull in data from the front-end
+
+def SubmitQuote(request):
+    if request.method == 'POST':
+        # Create form instance and pull in data from the front-end
         form = QuoteSubmissionForm(request.POST)
-        
-        #Make sure submitted info is valid
-        if form.is_valid():                        
+
+        # Make sure submitted info is valid
+        if form.is_valid():
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
             phone = form.cleaned_data['phone']
             comments = form.cleaned_data['comments']
-            
+
             try:
-                #Try to save DB Record
+                # Try to save DB Record
                 new_record = Quote(
                     first_name=first_name,
                     last_name=last_name,
@@ -53,36 +58,40 @@ def SubmitQuote(request):
                     closed=False,
                     cost=0
                 )
-                #Save new quote record entry
+                # Save new quote record entry
                 new_record.save()
 
-                #Build E-Mail Templates
-                generated_html = render_to_string('quotes/email_html.html', {'quote': new_record})              
-                generated_txt = render_to_string('quotes/email_text.html', {'quote': new_record})
-                #Get first name to pass to /thanks
-                first_name = str(new_record.first_name)                
+                # Build E-Mail Templates
+                generated_html = render_to_string('quotes/email_html.html',
+                                                  {'quote': new_record})
+                generated_txt = render_to_string('quotes/email_text.html',
+                                                 {'quote': new_record})
+
+                # Get first name to pass to /thanks
+                first_name = str(new_record.first_name)
                 sendMailToContacts(first_name, generated_html, generated_txt)
 
-            except Exception as err:                
+            except Exception as err:
                 log(err)
 
             return HttpResponseRedirect('/thanks/?r=' + str(first_name))
     else:
         form = QuoteSubmissionForm()
 
-    
     template_name = 'quotes/submitQuote.html'
-    return render(request, template_name, {'form': form})    
-    
+    return render(request, template_name, {'form': form})
+
+
 def Export(request):
-    #Get current time for report generated on date/time    
+    # Get current time for report generated on date/time
     now = datetime.now()
 
     try:
-        #Get list of selected quotes
+        # Get list of selected quotes
         ids = request.GET['ids']
-        #Build two variables - one a list for the quote query, 
-        #the other a string to pass to the ExportToXLS link should it be clicked.
+        # Build two variables - one a list for the quote query,
+        # the other a string to pass to the ExportToXLS
+        # link should it be clicked.
         built_query = []
         export_query = "?exp="
 
@@ -93,14 +102,16 @@ def Export(request):
             else:
                 export_query = export_query + "," + str(quote_id)
 
-        #DB Query for results
-        results = Quote.objects.filter(pk__in=built_query)    
-        #Render Template
+        # DB Query for results
+        results = Quote.objects.filter(pk__in=built_query)
+        # Render Template
         template_name = 'quotes/export.html'
     except Exception as err:
         log(err)
 
-    return render(request, template_name, {'report_results': results, 'datetime': now, 'exportQuery': export_query})
+    return render(request, template_name, {'report_results': results,
+                  'datetime': now, 'exportQuery': export_query})
+
 
 def ExportToXLS(request):
     def boolToYesNo(booleanValue):
@@ -111,7 +122,6 @@ def ExportToXLS(request):
         else:
             return ""
 
-
     import xlwt
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename=report.xls'
@@ -119,18 +129,18 @@ def ExportToXLS(request):
     ws = wb.add_sheet("Report")
     built_query = []
 
-    if request.GET['exp'] == u'All':        
+    if request.GET['exp'] == u'All':
         query = Quote.objects.all()
     else:
         for quote_id in request.GET['exp'].split(','):
             built_query.append(str(quote_id))
 
         query = Quote.objects.filter(pk__in=built_query)
-        
+
     font_style = xlwt.XFStyle()
     font_style.font.bold = True
 
-    #For iteration of spreadsheet columns
+    # For iteration of spreadsheet columns
     col_num = 0
     columns = [
         ("First Name", 3000),
@@ -146,27 +156,26 @@ def ExportToXLS(request):
     ]
 
     for column_name, column_length in columns:
-        ws.write(0,col_num, column_name, font_style)
+        ws.write(0, col_num, column_name, font_style)
         ws.col(col_num).width = column_length
         col_num += 1
-    
-    #For iteration of spreadsheet rows
+
+    # For iteration of spreadsheet rows
     row_num = 1
     for quote in query:
-        #Write each of the values from the query to the spreadsheet   
+        # Write each of the values from the query to the spreadsheet
         ws.write(row_num, 0, quote.first_name)
         ws.write(row_num, 1, quote.last_name)
         ws.write(row_num, 2, quote.email)
         ws.write(row_num, 3, quote.phone)
-        ws.write(row_num, 4, str(quote.date_requested.strftime("%m/%d/%y")) )
+        ws.write(row_num, 4, str(quote.date_requested.strftime("%m/%d/%y")))
         ws.write(row_num, 5, quote.comments)
-        ws.write(row_num, 6, boolToYesNo(quote.requiresResponse) )
-        ws.write(row_num, 7, boolToYesNo(quote.closed) )
+        ws.write(row_num, 6, boolToYesNo(quote.requiresResponse))
+        ws.write(row_num, 7, boolToYesNo(quote.closed))
         ws.write(row_num, 8, quote.cost)
-        ws.write(row_num, 9, str(quote.id) )
+        ws.write(row_num, 9, str(quote.id))
         row_num += 1
 
     wb.save(response)
 
     return response
-
