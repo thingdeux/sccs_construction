@@ -5,34 +5,43 @@ from quotes.models import Quote, QuoteSubmissionForm, sendMailToContacts
 from django.utils.timezone import now
 from quotes.log import log
 from datetime import datetime
+from django.views.decorators.cache import cache_page
 
 
 # Basic Direct to Template Views.
+# 86400 Seconds == 24 Hours - This cached page will expire once every 30 days
+@cache_page(86400 * 30)
 def Index(request):
-    return render(request, 'quotes/index.html')
-
-
+    current_year = now().year
+    return render(request, 'quotes/index.html', {"current_year": current_year})
+# 86400 Seconds == 24 Hours - This cached page will expire once every 30 days
+@cache_page(86400 * 30)
 def Services(request):
-    return render(request, 'quotes/services.html')
-
-
+    current_year = now().year
+    return render(request, 'quotes/services.html', {"current_year": current_year})
+# 86400 Seconds == 24 Hours - This cached page will expire once every 30 days
+@cache_page(86400 * 30)
 def AboutUs(request):
-    return render(request, 'quotes/aboutus.html')
+    current_year = now().year
+    return render(request, 'quotes/aboutus.html', {"current_year": current_year})
 
 
 # Dynamic URL end points
+@cache_page(86400 * 30)
 def Thanks(request):
+    current_year = now().year
     # Passes the first name from the contact form and thanks the submitter
     try:
         first_name = request.GET['r'][:254]
         template_name = 'quotes/thanks.html'
-        return render(request, template_name, {'name': first_name})
+        return render(request, template_name, {'name': first_name, "current_year": current_year})
     except:
         # If no name is passed return 404
         raise Http404
 
 
 def SubmitQuote(request):
+    current_year = now().year
     if request.method == 'POST':
         # Create form instance and pull in data from the front-end
         form = QuoteSubmissionForm(request.POST)
@@ -79,7 +88,7 @@ def SubmitQuote(request):
         form = QuoteSubmissionForm()
 
     template_name = 'quotes/submitQuote.html'
-    return render(request, template_name, {'form': form})
+    return render(request, template_name, {'form': form, 'current_year': current_year})
 
 
 def Export(request):

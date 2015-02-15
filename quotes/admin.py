@@ -3,7 +3,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseRedirect
 from quotes.models import Quote, ContactEmail
 
-
+# Custom admin functionality that will generate an Excel report of all quotes in the system.
 def Export_Selected(modeladmin, request, queryset):
     selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
     ct = ContentType.objects.get_for_model(queryset.model)
