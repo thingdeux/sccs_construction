@@ -1,2 +1,4 @@
 *.pyc
 cred.json
+local_settings.py
+Construction.iml
